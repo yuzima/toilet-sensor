@@ -24,25 +24,13 @@ gpiop.setup(PIN, gpiop.DIR_IN).then(() => {
 
 // Reads the value of a pin, returning a promise of the result
 function readInput(pin) {
-  console.log(gpiop.read(pin))
   return gpiop.read(pin)
-  // return new Promise((resolve, reject) => {
-  //   gpiop.read(pin, function (err, value) {
-  //     console.log(err, value)
-  //     if (err) {
-  //       reject(err)
-  //       return
-  //     }
-  //     resolve(value)
-  //   })
-  // })
 }
 
 // check the status of the door and update slack if necessary
 async function checkStatus () {
   const curStatus = await readDoor()
   if (curStatus !== prevStatus) {
-    prevStatus = curStatus
     logger.info('Door changed to ' + curStatus)
     const msg = {
       status: curStatus,
@@ -54,12 +42,12 @@ async function checkStatus () {
     // const timestamp = await updateSlack(msg, prevMsgTimestamp)
     // prevMsgTimestamp = timestamp
   }
+  prevStatus = curStatus
 }
 
 // Check if the door is open or closed
 async function readDoor () {
   const pinValue = await readInput(PIN)
-  console.log(pinValue)
   logger.info('Read Door Status: ' + pinValue)
   return pinValue ? DOOR_OCCUPIED : DOOR_FREE
 }
