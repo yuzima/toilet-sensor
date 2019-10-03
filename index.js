@@ -18,6 +18,7 @@ const config = Object.assign({}, defaultConfig, process.env)
 
 const PIN = config.pin
 gpiop.setup(PIN, gpiop.DIR_IN).then(() => {
+  logger.info('Start to sense')
   readInput(PIN)
   setInterval(checkStatus, DOOR_UPDATE_FREQ)
 })
@@ -37,10 +38,6 @@ async function checkStatus () {
       timestamp: new Date().getTime()
     }
     notifyBot(msg)
-    // const msg = (curStatus === DOOR_FREE ? OPEN_MESSAGE : CLOSED_MESSAGE)
-    // update and save the timestamp of the message
-    // const timestamp = await updateSlack(msg, prevMsgTimestamp)
-    // prevMsgTimestamp = timestamp
   }
   prevStatus = curStatus
 }
@@ -48,7 +45,6 @@ async function checkStatus () {
 // Check if the door is open or closed
 async function readDoor () {
   const pinValue = await readInput(PIN)
-  // logger.info('Read Door Status: ' + pinValue)
   return pinValue ? DOOR_OCCUPIED : DOOR_FREE
 }
 
@@ -56,7 +52,7 @@ function notifyBot(body) {
   fetch(`https://young-taiga-63010.herokuapp.com/hubot/toilet/${config.toiletId}`, {
     method: 'POST',
     body: JSON.stringify(body),
-    header: { 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'application/json' }
   })
   .then(res => logger.info(res.json()))
   .catch(err => logger.error(err))
