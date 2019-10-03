@@ -1,0 +1,6 @@
+{
+  "toiletId": 1,
+  "pin": 16,
+  "open_message": ":admission_tickets:",
+  "closed_message": ":no_entry_sign:"
+}

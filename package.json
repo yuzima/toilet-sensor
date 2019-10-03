@@ -1,0 +1,29 @@
+{
+  "name": "toilet-sensor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "node-fetch": "^2.6.0",
+    "rpi-gpio": "^2.1.4",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuzima/toilet-sensor.git"
+  },
+  "keywords": [
+    "toilet"
+  ],
+  "author": "yuzi.ma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yuzima/toilet-sensor/issues"
+  },
+  "homepage": "https://github.com/yuzima/toilet-sensor#readme"
+}
