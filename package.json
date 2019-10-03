@@ -5,12 +5,14 @@
   "main": "index.js",
   "dependencies": {
     "node-fetch": "^2.6.0",
+    "nodemon": "^1.19.3",
     "rpi-gpio": "^2.1.4",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^4.2.1"
   },
   "devDependencies": {},
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
