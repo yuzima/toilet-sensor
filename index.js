@@ -1,4 +1,6 @@
 const gpio = require('rpi-gpio')
+const fs = require('fs')
+const path = require('path')
 const logger = require('./logger')
 const fetch = require('node-fetch')
 

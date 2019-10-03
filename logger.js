@@ -8,7 +8,7 @@ if (!fs.existsSync(dir)){
   fs.mkdirSync(dir);
 }
 
-const logger = new(winston.Logger)({
+const logger = new(winston.createLogger)({
   transports: [
     new(winston.transports.Console)({ level: 'info'}),
     new(winston.transports.DailyRotateFile)({
