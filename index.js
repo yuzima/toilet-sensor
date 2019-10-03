@@ -18,6 +18,7 @@ const config = Object.assign({}, defaultConfig, process.env)
 
 const PIN = config.pin
 gpiop.setup(PIN, gpiop.DIR_IN).then(() => {
+  console.log('here')
   run()
 })
 
