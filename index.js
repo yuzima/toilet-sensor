@@ -24,7 +24,7 @@ gpiop.setup(PIN, gpiop.DIR_IN).then(() => {
 function run() {
   readInput(PIN)
   // Keep checking door every so often
-  // setInterval(checkStatus, DOOR_UPDATE_FREQ)
+  setInterval(checkStatus, DOOR_UPDATE_FREQ)
 }
 
 // Reads the value of a pin, returning a promise of the result
