@@ -18,7 +18,6 @@ const config = Object.assign({}, defaultConfig, process.env)
 
 const PIN = config.pin
 gpiop.setup(PIN, gpiop.DIR_IN).then(() => {
-  console.log('here')
   readInput(PIN)
   setInterval(checkStatus, DOOR_UPDATE_FREQ)
 })
@@ -26,9 +25,10 @@ gpiop.setup(PIN, gpiop.DIR_IN).then(() => {
 // Reads the value of a pin, returning a promise of the result
 function readInput(pin) {
   return new Promise((resolve, reject) => {
+    console.log('readInput')
     gpiop.read(pin, function (err, value) {
+      console.log(err, value)
       if (err) {
-        console.log(err)
         reject(err)
         return
       }
