@@ -59,6 +59,7 @@ async function checkStatus () {
 // Check if the door is open or closed
 async function readDoor () {
   const pinValue = await readInput(PIN)
+  console.log(pinValue)
   logger.info('Read Door Status: ' + pinValue)
   return pinValue ? DOOR_OCCUPIED : DOOR_FREE
 }
