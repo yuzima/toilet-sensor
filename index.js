@@ -19,7 +19,9 @@ const config = Object.assign({}, defaultConfig, process.env)
 const PIN = config.pin
 gpiop.setup(PIN, gpiop.DIR_IN).then(() => {
   logger.info('Start to sense')
-  readInput(PIN)
+  readInput(PIN).then((pinValue) => {
+    prevStatus = pinValue
+  })
   setInterval(checkStatus, DOOR_UPDATE_FREQ)
 })
 
