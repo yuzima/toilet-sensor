@@ -1,4 +1,5 @@
 const gpio = require('rpi-gpio')
+const gpiop = gpio.promise
 const fs = require('fs')
 const path = require('path')
 const logger = require('./logger')
@@ -16,15 +17,20 @@ const defaultConfig = JSON.parse(fs.readFileSync(path.join(__dirname, '/config.j
 const config = Object.assign({}, defaultConfig, process.env)
 
 const PIN = config.pin
-gpio.setup(PIN, gpio.DIR_IN, readInput)
+gpiop.setup(PIN, gpiop.DIR_IN).then(() => {
+  run()
+})
 
-// Keep checking door every so often
-setInterval(checkStatus, DOOR_UPDATE_FREQ)
+function run() {
+  readInput(PIN)
+  // Keep checking door every so often
+  // setInterval(checkStatus, DOOR_UPDATE_FREQ)
+}
 
 // Reads the value of a pin, returning a promise of the result
-function readInput (pin) {
+function readInput(pin) {
   return new Promise((resolve, reject) => {
-    gpio.read(pin, function (err, value) {
+    gpiop.read(pin, function (err, value) {
       if (err) {
         reject(err)
         return
