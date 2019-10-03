@@ -19,17 +19,13 @@ const config = Object.assign({}, defaultConfig, process.env)
 const PIN = config.pin
 gpiop.setup(PIN, gpiop.DIR_IN).then(() => {
   console.log('here')
-  run()
-})
-
-async function run() {
-  await readInput(PIN)
-  // Keep checking door every so often
+  readInput(PIN)
   setInterval(checkStatus, DOOR_UPDATE_FREQ)
-}
+})
 
 // Reads the value of a pin, returning a promise of the result
 function readInput(pin) {
+  console.log(PIN)
   return new Promise((resolve, reject) => {
     gpiop.read(pin, function (err, value) {
       if (err) {
@@ -43,8 +39,8 @@ function readInput(pin) {
 
 // check the status of the door and update slack if necessary
 async function checkStatus () {
+  console.log('checkStatus')
   const curStatus = await readDoor()
-  console.log(curStatus)
   if (curStatus !== prevStatus) {
     prevStatus = curStatus
     logger.info('Door changed to ' + curStatus)
