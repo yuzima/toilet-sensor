@@ -22,8 +22,8 @@ gpiop.setup(PIN, gpiop.DIR_IN).then(() => {
   run()
 })
 
-function run() {
-  readInput(PIN)
+async function run() {
+  await readInput(PIN)
   // Keep checking door every so often
   setInterval(checkStatus, DOOR_UPDATE_FREQ)
 }
@@ -44,6 +44,7 @@ function readInput(pin) {
 // check the status of the door and update slack if necessary
 async function checkStatus () {
   const curStatus = await readDoor()
+  console.log(curStatus)
   if (curStatus !== prevStatus) {
     prevStatus = curStatus
     logger.info('Door changed to ' + curStatus)
