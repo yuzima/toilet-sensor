@@ -25,10 +25,10 @@ gpiop.setup(PIN, gpiop.DIR_IN).then(() => {
 
 // Reads the value of a pin, returning a promise of the result
 function readInput(pin) {
-  console.log(PIN)
   return new Promise((resolve, reject) => {
     gpiop.read(pin, function (err, value) {
       if (err) {
+        console.log(err)
         reject(err)
         return
       }
@@ -39,7 +39,6 @@ function readInput(pin) {
 
 // check the status of the door and update slack if necessary
 async function checkStatus () {
-  console.log('checkStatus')
   const curStatus = await readDoor()
   if (curStatus !== prevStatus) {
     prevStatus = curStatus
