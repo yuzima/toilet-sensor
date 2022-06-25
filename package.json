@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "nodemon": "^1.19.3",
     "rpi-gpio": "^2.1.4",
     "winston": "^3.2.1",
